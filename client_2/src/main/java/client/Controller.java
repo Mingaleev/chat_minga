@@ -127,8 +127,7 @@ public class Controller implements Initializable {
                             nickname = str.split("\\s", 2)[1];
                             setAuthenticated(true);
 
-                            history = new File("C:\\Users\\Minga\\IdeaProjects\\chat_minga\\client_2\\src\\main\\java\\client\\history\\" +
-                                    nickname + ".txt");
+                            history = new File("history\\" + nickname + ".txt");
                             if (!history.exists()){
                                 history.createNewFile();
                             }
@@ -140,6 +139,7 @@ public class Controller implements Initializable {
                                 // считываем остальные строки в цикле
                                 line = reader.readLine();
                             }
+
 //                            textArea.appendText(str + "\n");
                             break;
                         }
