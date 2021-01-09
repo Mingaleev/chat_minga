@@ -5,6 +5,7 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
+import java.util.concurrent.ExecutorService;
 
 public class ClientHandler {
 
@@ -25,7 +26,9 @@ public class ClientHandler {
 
             socket.setSoTimeout(120000);
 
-            new Thread(()-> {
+            ExecutorService es = server.getExecutorService();
+
+            es.execute(()-> {
                 try {
                     // цикл аутентификации
                     while (true){
@@ -117,7 +120,7 @@ public class ClientHandler {
                         e.printStackTrace();
                     }
                 }
-            }).start();
+            });
         }  catch (IOException e) {
             e.printStackTrace();
         }

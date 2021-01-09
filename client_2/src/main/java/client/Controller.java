@@ -139,6 +139,8 @@ public class Controller implements Initializable {
                                 // считываем остальные строки в цикле
                                 line = reader.readLine();
                             }
+                            fr.close();
+                            reader.close();
 
 //                            textArea.appendText(str + "\n");
                             break;
@@ -197,6 +199,11 @@ public class Controller implements Initializable {
                 } catch (IOException e) {
                     e.printStackTrace();
                 } finally {
+                    try {
+                        out.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     System.out.println("Мы отключились от сервера");
                     setAuthenticated(false);
                     try {
