@@ -7,6 +7,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Vector;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Server {
 
@@ -15,10 +17,17 @@ public class Server {
     Socket socket = null;
     List<ClientHandler> clients;
     private AuthService authService;
+    ExecutorService executorService;
+
+    public ExecutorService getExecutorService() {
+        return executorService;
+    }
 
     public Server() {
         clients = new Vector<>();
         authService = new SimpleAuthService();
+        executorService = Executors.newCachedThreadPool();
+
 
         try {
             server = new ServerSocket(PORT);
@@ -34,6 +43,7 @@ public class Server {
         } finally {
             try {
                 server.close();
+                executorService.shutdown();
             } catch (IOException e) {
                 e.printStackTrace();
             }
