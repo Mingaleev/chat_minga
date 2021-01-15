@@ -104,6 +104,7 @@ public class ClientHandler {
                             }
 
                         }else {
+                            server.loger("Клиент " + nickname + " прислал сообщение");
                             server.broadCastMsg(this, str);
                         }
                     }
