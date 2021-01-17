@@ -9,10 +9,14 @@ public class Four {
 
         for (int i = 0; i < a.length; i++) {
             if (a[i] == 4) {
-                check = i;
+                check = i + 1;
             }
         }
 
-        return copyOfRange (a,check+1,a.length);
+        if (check == 0) {
+            throw new RuntimeException();
+        }
+
+        return copyOfRange (a,check,a.length);
     }
 }

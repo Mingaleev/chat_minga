@@ -13,6 +13,8 @@ public class OneFour {
                 check1 = true;
             } else if (j == 4) {
                 check4 = true;
+            } else {
+                return false;
             }
         }
         return check1 && check4;
