@@ -9,8 +9,11 @@ import java.util.List;
 import java.util.Vector;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.logging.*;
 
 public class Server {
+
+    private static final Logger loger = Logger.getLogger(Server.class.getName());
 
     private static int PORT = 8189;
     ServerSocket server = null;
@@ -27,15 +30,29 @@ public class Server {
         clients = new Vector<>();
         authService = new SimpleAuthService();
         executorService = Executors.newCachedThreadPool();
+        Handler consolHandler = new ConsoleHandler();
+        try {
+            Handler fileHandler = new FileHandler("logs.log", true);
+            fileHandler.setFormatter(new SimpleFormatter());
+            loger.addHandler(fileHandler);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        loger.addHandler(consolHandler);
+        loger.setUseParentHandlers(false);
+
 
 
         try {
             server = new ServerSocket(PORT);
-            System.out.println("Сервер запущен");
+//            System.out.println("Сервер запущен");
+            loger.severe( "Сервер запущен");
 
             while (true) {
                 socket = server.accept();
-                System.out.println("Клиент подключился");
+                loger.severe( "Клиент подключился");
+//                System.out.println("Клиент подключился");
                 new ClientHandler(this, socket);
             }
         } catch (IOException e) {
@@ -44,6 +61,7 @@ public class Server {
             try {
                 server.close();
                 executorService.shutdown();
+                loger.severe( "ошибка");
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -57,6 +75,10 @@ public class Server {
         for (ClientHandler client : clients) {
             client.sendMsg(message + "\n");
         }
+    }
+
+    public void loger(String str){
+        loger.severe(str);
     }
 
     public void subscribe(ClientHandler clientHandler){
