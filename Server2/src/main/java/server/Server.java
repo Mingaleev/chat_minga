@@ -47,11 +47,11 @@ public class Server {
         try {
             server = new ServerSocket(PORT);
 //            System.out.println("Сервер запущен");
-            loger.severe( "Сервер запущен");
+            loger.info( "Сервер запущен");
 
             while (true) {
                 socket = server.accept();
-                loger.severe( "Клиент подключился");
+                loger.info( "Клиент подключился");
 //                System.out.println("Клиент подключился");
                 new ClientHandler(this, socket);
             }
@@ -78,7 +78,7 @@ public class Server {
     }
 
     public void loger(String str){
-        loger.severe(str);
+        loger.info(str);
     }
 
     public void subscribe(ClientHandler clientHandler){

@@ -23,7 +23,7 @@ public class MainTest {
     public static Collection<Object[]> data() {
         return Arrays.asList(new Object[][]{
                 {new int[]{5, 1, 9}, new int[]{1,8,4,9, 4, 5, 1, 9}},
-                {new int[]{1, 9}, new int[]{3, 8, 9, 4, 1, 9}},
+                {new int[]{1, 9}, new int[]{3, 8, 9, 1, 9}},
                 {new int[]{113, 990}, new int[]{117, 4, 56, 4, 113, 990}},
                 {new int[]{10, 55, 66, 77}, new int[]{10, 10, 4, 4, 10, 55, 66, 77}},
         });
